@@ -53,13 +53,13 @@ jobs:
           with:
             fetch-depth: '10'
       - name: Bump version and push tag
+          uses: anothrNick/github-tag-action@1.36.0
           uses: rjstone/discord-webhook-notify@v1
           if: ${{ success() && github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
           with:
             severity: info
             details: Deployment pipeline succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-            uses: anothrNick/github-tag-action@1.36.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
