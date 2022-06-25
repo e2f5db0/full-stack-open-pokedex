@@ -1,9 +1,9 @@
 name: Periodic health check
 
 on:
-  push:
-    branches:
-      - exercise-11.19
+  schedule:
+    # every mon & fri @ 12:00am
+    - cron:  '0 12 * * 0,4'
 
 jobs:
   periodic_health_check:
