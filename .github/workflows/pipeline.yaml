@@ -39,7 +39,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ success() && github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fs-2022-pokedex"
@@ -47,7 +47,9 @@ jobs:
           healthcheck: https://fs-2022-pokedex.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
+      - name: Deployment successful discord notification
         uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        if: ${{ success() && github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         with:
           severity: info
           description: Pokedex deployed to Heroku successfully!
