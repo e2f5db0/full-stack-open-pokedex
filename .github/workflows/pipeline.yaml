@@ -59,7 +59,7 @@ jobs:
             severity: info
             details: Deployment pipeline succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-            uses: anothrNick/github-tag-action@1.36.0
+          uses: anothrNick/github-tag-action@1.36.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
