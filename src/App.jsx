@@ -21,9 +21,6 @@ const App = () => {
     return <ErrorMessage error={error} />
   }
 
-  // let's break the build to get the pipeline discord notification
-  this will break the build
-
   return (
     <Router>
       <Switch>
