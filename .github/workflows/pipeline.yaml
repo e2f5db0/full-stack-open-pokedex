@@ -47,6 +47,14 @@ jobs:
           healthcheck: https://fs-2022-pokedex.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
+      - name: Deployment successful discord notification
+        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        if: ${{ success() }}
+        with:
+          severity: info
+          description: Pokedex deployed to Heroku successfully!
+          text: The new version of the app can be found at https://fs-2022-pokedex.herokuapp.com
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
