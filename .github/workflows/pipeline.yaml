@@ -47,7 +47,6 @@ jobs:
           healthcheck: https://fs-2022-pokedex.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
-      - name: Deployment successful discord notification
         uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
         if: ${{ success() }}
         with:
