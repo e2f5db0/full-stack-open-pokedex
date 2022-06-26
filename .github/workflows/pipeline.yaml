@@ -27,7 +27,7 @@ jobs:
         if: failure()
         with:
           severity: error
-          details: Build broken by the commit ${{ join(toJson(github.event.commits.*.url }}
+          details: Build broken by the commit ${{ join(toJson(github.event.commits.*.url) }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: test
         run: npm run test
