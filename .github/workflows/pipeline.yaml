@@ -24,10 +24,11 @@ jobs:
         run: npm run build
       - name: Build failure notification
         uses: rjstone/discord-webhook-notify@v1
-        if: failure()
+        if: ${{ !success() }}
         with:
           severity: error
-          details: Build broken by the commit ${{github.event.head_commit.url}}
+          details: Build broken 
+          #by the commit ${{ github.event.head_commit.url }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: test
         run: npm run test
