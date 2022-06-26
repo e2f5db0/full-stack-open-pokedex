@@ -6,6 +6,9 @@ import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
 
+// break the build to test the pipeline notification
+make the build break
+
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,
   name,
