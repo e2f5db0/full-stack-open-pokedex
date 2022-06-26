@@ -22,13 +22,12 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: Build failure discord notification
-        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
-        if: ${{ failure() }}
+      - name: Build failure notification
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
         with:
           severity: error
-          text: 'Build failed'
-          description: Build broken by the commit ${{github.event.head_commit.url}}
+          details: Build failed.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: test
         run: npm run test
@@ -52,7 +51,7 @@ jobs:
         if: ${{ success() && github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         with:
           severity: info
-          description: Pokedex deployed to Heroku successfully!
+          description: Pokedex deployed successfully to Heroku!
           text: The new version of the app can be found at https://fs-2022-pokedex.herokuapp.com
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
